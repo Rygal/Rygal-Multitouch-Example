@@ -5,7 +5,7 @@ This is a short example of [Rygal](http://rygal.org) using multitouch.
 
 Preview
 ---------------------------------
-<iframe width="560" height="315" src="http://www.youtube.com/embed/6cbdxCgzDTk?rel=0" frameborder="0" allowfullscreen></iframe>
+[Click here to see a preview on Youtube](http://www.youtube.com/watch?v=6cbdxCgzDTk)
 
 Used technologies
 --------------------------------
