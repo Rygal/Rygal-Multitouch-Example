@@ -33,7 +33,6 @@ import org.rygal.Game;
 import org.rygal.GameTime;
 import org.rygal.graphic.Canvas;
 import org.rygal.Scene;
-import org.rygal.util.Utils;
 
 import org.rygal.input.TouchEvent;
 
@@ -59,8 +58,7 @@ class MainScene extends Scene {
 		
 		game.touch.addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin);
 		game.touch.addEventListener(TouchEvent.TOUCH_MOVE, onTouchMove);
-		game.getDisplayObject().stage.addEventListener(nme.events.TouchEvent.TOUCH_END, onTouchEnd);
-		//game.touch.addEventListener(TouchEvent.TOUCH_END, onTouchEnd);
+		game.touch.addEventListener(TouchEvent.TOUCH_END, onTouchEnd);
 	}
 
 	public function onTouchBegin(e:TouchEvent) {
@@ -83,7 +81,7 @@ class MainScene extends Scene {
 		sprite.y = e.y - texture.width/2;
 	}
 
-	public function onTouchEnd(e:nme.events.TouchEvent) {
+	public function onTouchEnd(e:TouchEvent) {
 		trace("Touch end");
 		
 		var sprite:Sprite = touches.get(e.touchPointID);

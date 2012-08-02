@@ -10,7 +10,7 @@
 	<source path="Source" />
 	
 	<haxelib name="nme"/>
-	<!--<haxelib name="rygal" />-->
+	<!-- You need Rygal 1.2 to use this -->
 	<classpath path="/Users/kasoki/Projects/Rygal" />
 	
 	<assets path="Assets" rename="assets" include="*" exclude="nme.svg" />
