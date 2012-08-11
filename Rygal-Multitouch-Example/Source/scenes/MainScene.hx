@@ -33,6 +33,8 @@ import org.rygal.Game;
 import org.rygal.GameTime;
 import org.rygal.graphic.Canvas;
 import org.rygal.Scene;
+import org.rygal.graphic.Font;
+import org.rygal.graphic.Color;
 
 import org.rygal.input.TouchEvent;
 
@@ -43,8 +45,9 @@ import org.rygal.input.TouchEvent;
 
 class MainScene extends Scene {
 
-	private var touches:IntHash<Sprite>;
+	private var sprites:IntHash<Sprite>;
 	private var texture:Texture;
+	private var font:Font;
 
 	public function new() {
 		super();
@@ -53,8 +56,9 @@ class MainScene extends Scene {
 	override public function load(game:Game):Void {
 		super.load(game);
 		
-		touches = new IntHash<Sprite>();
+		sprites = new IntHash<Sprite>();
 		texture = Texture.fromAssets("assets/Octocat.png");
+		font = Font.fromAssets("assets/charset.txt");
 		
 		game.touch.addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin);
 		game.touch.addEventListener(TouchEvent.TOUCH_MOVE, onTouchMove);
@@ -62,31 +66,25 @@ class MainScene extends Scene {
 	}
 
 	public function onTouchBegin(e:TouchEvent) {
-		trace("Touch begin");
-		
 		var touchSprite:Sprite = new Sprite(texture);
 
 		touchSprite.x = e.x - texture.width/2;
 		touchSprite.y = e.y - texture.width/2;
 
-		touches.set(e.touchPointID, touchSprite);
+		sprites.set(e.touchPointID, touchSprite);
 	}
 	
 	public function onTouchMove(e:TouchEvent) {
-		trace("Touch move: x:" + e.x + ", y: " + e.y);
-		
-		var sprite:Sprite = touches.get(e.touchPointID);
+		var sprite:Sprite = sprites.get(e.touchPointID);
 		
 		sprite.x = e.x - texture.width/2;
 		sprite.y = e.y - texture.width/2;
 	}
 
 	public function onTouchEnd(e:TouchEvent) {
-		trace("Touch end");
+		var sprite:Sprite = sprites.get(e.touchPointID);
 		
-		var sprite:Sprite = touches.get(e.touchPointID);
-		
-		touches.remove(e.touchPointID);
+		sprites.remove(e.touchPointID);
 	}
 
 	override public function unload():Void {
@@ -96,7 +94,6 @@ class MainScene extends Scene {
 
 	override public function update(time:GameTime):Void {
 		super.update(time);
-
 	}
 	
 	override public function draw(screen:Canvas):Void {
@@ -104,10 +101,12 @@ class MainScene extends Scene {
 		
 		super.draw(screen);
 		
-		for(sprite in touches) {
+		for(sprite in sprites) {
 			if(sprite != null) {
 				sprite.draw(screen);
 			}
 		}
+		
+		screen.drawString(font, "Touch point count: " + game.touch.getTouchPointCount(), Color.BLACK, 10, 10);
 	}
 }
