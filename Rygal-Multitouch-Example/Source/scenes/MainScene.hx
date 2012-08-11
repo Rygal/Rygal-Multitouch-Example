@@ -36,6 +36,7 @@ import org.rygal.Scene;
 import org.rygal.graphic.Font;
 import org.rygal.graphic.Color;
 
+import org.rygal.input.Touch;
 import org.rygal.input.TouchEvent;
 
 /**
@@ -106,7 +107,7 @@ class MainScene extends Scene {
 				sprite.draw(screen);
 			}
 		}
-		
-		screen.drawString(font, "Touch point count: " + game.touch.getTouchPointCount(), Color.BLACK, 10, 10);
+		var count:Int = game.getInputCount(Touch);
+		screen.drawString(font, "Touch point count: " + count, Color.BLACK, 10, 10);
 	}
 }
